@@ -18,18 +18,21 @@ $result = $mysqli->query("SELECT * FROM users ORDER BY id DESC");
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="add.php">Add New Data</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            </ul>
+        <nav class="navbar">
+            <div class="container">
+                <h1 class="logo"><a href="index.php">Your Logo</a></h1>
+                <ul class="nav-links">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="add.php">Add New Data</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
     <main>
         <h2>Homepage</h2>
-        <table>
+        <table border="1" align="center">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -57,5 +60,11 @@ $result = $mysqli->query("SELECT * FROM users ORDER BY id DESC");
             </tbody>
         </table>
     </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <?php echo date('Y'); ?> Your Company. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
