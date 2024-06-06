@@ -18,6 +18,7 @@ $email = $resultData['email'];
 <html>
 <head>	
 	<title>Edit Data</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
