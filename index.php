@@ -1,15 +1,18 @@
 <?php
-// Include the database connection file
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
+
 require_once("dbConnection.php");
 
-// Fetch data in descending order (latest entry first)
-$result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
+$result = $mysqli->query("SELECT * FROM users ORDER BY id DESC");
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -19,6 +22,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="add.php">Add New Data</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -29,18 +33,22 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Age</th>
                     <th>Email</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                    <th>Photo</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                while ($res = mysqli_fetch_assoc($result)) {
+                while ($res = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>".$res['name']."</td>";
-                    echo "<td>".$res['age']."</td>";
-                    echo "<td>".$res['email']."</td>";    
+                    echo "<td>".$res['email']."</td>";
+                    echo "<td>".$res['gender']."</td>";
+                    echo "<td>".$res['city']."</td>";    
+                    echo "<td><img src='uploads/".$res['photo']."' width='50'></td>";
                     echo "<td><a href=\"edit.php?id=$res[id]\">Edit</a> | 
                     <a href=\"delete.php?id=$res[id]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";
                     echo "</tr>";
